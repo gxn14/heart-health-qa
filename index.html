@@ -1,108 +1,204 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>心血管健康知识图谱</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心血管疾病患者居家心脏康复自我管理行为智能问答系统</title>
   <style>
     :root {
-      --bg: #eef5ff;
-      --panel: #ffffff;
-      --line: #dbe9f9;
-      --text: #203452;
-      --muted: #5b738c;
-      --blue: #2e7ae7;
-      --soft-blue: #dfeefb;
-      --navy: #0d2d5a;
+      --blue: #287cf0;
+      --dark: #203452;
+      --line: #dce8f8;
+      --bg: #f4f8ff;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      background: linear-gradient(180deg, #edf3ff 0%, #f4f8ff 100%);
-      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-      color: var(--text);
-      padding: 24px;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background: linear-gradient(180deg, #f0f4ff 0%, #e8f0ff 50%, #f4f8ff 100%);
+      padding: 20px;
+      min-height: 100vh;
     }
 
-    .page {
-      max-width: 1280px;
+    .app {
+      max-width: 1200px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.78);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(24, 67, 128, 0.08);
-      overflow: hidden;
     }
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 26px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,0.4);
-    }
-
-    .title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 1px;
-    }
-
-    .title-badge {
-      font-size: 14px;
-      color: var(--blue);
-      background: #edf5ff;
-      border: 1px solid #cfe3ff;
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-weight: 500;
-    }
-
-    .search-btn {
-      border: 1px solid #cfe1ff;
-      background: linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
-      color: var(--blue);
-      border-radius: 10px;
-      padding: 10px 18px;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(46, 122, 231, 0.08);
-    }
-
-    .knowledge-panel {
-      padding: 18px 12px 12px;
-      background: #f4f8ff;
-    }
-
-    .knowledge-panel img {
-      display: block;
-      width: 100%;
-      height: auto;
+    .card {
+      background: white;
       border-radius: 12px;
-      background: #edf4ff;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(40, 124, 240, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 20px;
+    }
+
+    .header h1 {
+      color: var(--dark);
+      margin: 0 0 10px 0;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: var(--blue);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .qa-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .qa-section h2 {
+      color: var(--dark);
+      border-left: 4px solid var(--blue);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+
+    .qa-item {
+      margin-bottom: 15px;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      border-left: 3px solid var(--blue);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .qa-item:hover {
+      background: #e8f0ff;
+      transform: translateX(4px);
+    }
+
+    .qa-item .question {
+      color: var(--dark);
+      font-weight: bold;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .qa-item .answer {
+      color: #666;
+      margin: 8px 0 0 0;
+      font-size: 13px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .qa-item.active .answer {
+      max-height: 200px;
+    }
+
+    .knowledge-graph {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 400px;
+    }
+
+    .knowledge-graph h2 {
+      color: var(--dark);
+      border-left: 4px solid var(--blue);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .knowledge-graph img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(40, 124, 240, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="topbar">
-      <div class="title">
-        <span>知识图谱</span>
-        <span class="title-badge">本体关系</span>
-      </div>
-      <button class="search-btn">🔍 搜索知识节点</button>
-    </div>
+  <main class="app">
+    <section class="card">
+      <header class="header">
+        <h1>❤️ 心血管疾病患者居家心脏康复自我管理行为智能问答系统</h1>
+        <div class="subtitle">基于知识图谱的智能问答平台</div>
+      </header>
 
-    <div class="knowledge-panel">
-      <img src="./knowledge-graph.svg" alt="心血管健康知识图谱" />
-    </div>
-  </div>
+      <div class="container">
+        <div class="qa-section">
+          <h2>📚 常见问题</h2>
+          <div id="qa-container"></div>
+        </div>
+
+        <div class="knowledge-graph">
+          <h2>📊 知识图谱</h2>
+          <img src="knowledge-graph.svg" alt="心血管健康管理知识图谱" title="心血管健康知识图谱">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const answers = [
+      ['什么是心力衰竭', '心力衰竭是指心脏泵血功能下降，无法满足身体需要。它常见于高血压、冠心病、瓣膜病和心肌病等基础疾病之后。'],
+      ['心力衰竭的症状有哪些', '主要症状包括：呼吸困难、疲劳乏力、下肢水肿、腹胀、夜间不能平卧等。症状严重程度因人而异。'],
+      ['如何进行心脏康复训练', '心脏康复应在医生指导下进行，包括有氧运动（如散步、骑自行车）、力量训练和柔韧性训练。从低强度开始逐步增加。'],
+      ['心脏病患者应该如何饮食', '应低盐、低脂、低胆固醇饮食。多吃蔬菜、水果、全谷物和瘦肉。限制钠摄入，通常每日不超过2000mg。'],
+      ['服药期间需要注意什么', '按时按量服药，不可自行停药。注意药物副作用，定期复查。避免与某些食物或其他药物相互作用。'],
+      ['如何监测心脏健康', '定期测量血压、心率，进行心电图和超声心动图检查。记录症状变化，及时就医。'],
+      ['运动对心脏康复的作用', '适度运动可以增强心脏功能、改善循环、降低血压和心率、减轻体重。但要避免过度运动。'],
+      ['心理健康对康复有影响吗', '心理因素很重要。压力、焦虑、抑郁都会影响康复。建议进行心理疏导和放松训练。']
+    ];
+
+    const container = document.getElementById('qa-container');
+
+    answers.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'qa-item';
+      div.innerHTML = `
+        <p class="question">${index + 1}. ${item[0]}</p>
+        <p class="answer">${item[1]}</p>
+      `;
+
+      div.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+
+      container.appendChild(div);
+    });
+  </script>
 </body>
 </html>
