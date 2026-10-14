@@ -3,38 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>心血管疾病患者居家心脏康复自我管理问答</title>
+  <title>心血管疾病患者居家心脏康复自我管理知识问答</title>
   <style>
-    :root{--bg-1:#eef4ff;--bg-2:#f8fbff;--panel:rgba(255,255,255,0.86);--line:rgba(131,161,206,0.18);--text:#18314a;--muted:#64809d;--primary:#1d63df;--primary-2:#4a9bff;--success:#1c9c76;--radius-xl:20px;--shadow:0 18px 44px rgba(18,40,75,0.08)}
-    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);color:var(--text);padding:28px}
-    .layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:24px}
+    :root{--bg-1:#eef4ff;--bg-2:#f8fbff;--panel:rgba(255,255,255,0.96);--line:rgba(131,161,206,0.18);--text:#18314a;--muted:#64809d;--primary:#1d63df;--primary-2:#4a9bff;--success:#1c9c76;--radius-xl:14px;--shadow:0 6px 18px rgba(29,99,223,0.08)}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);color:var(--text);-webkit-font-smoothing:antialiased}
+    .layout{max-width:1200px;margin:24px auto;display:grid;grid-template-columns:1fr 360px;gap:24px;padding:0 16px}
     .header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
     .title{font-size:20px;font-weight:800}
     .subtitle{color:var(--muted);font-size:12px}
     .panel{background:var(--panel);border-radius:var(--radius-xl);padding:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
-    .main{padding:22px}
-    .controls{display:flex;gap:12px;margin-bottom:14px}
-    .search{flex:1;height:54px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font-size:15px}
-    .btn{height:54px;padding:0 18px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;font-weight:700;cursor:pointer}
-    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-    .chip{background:rgba(243,248,255,0.95);border-radius:999px;padding:8px 12px;font-size:13px;border:1px solid var(--line);cursor:pointer}
-    .chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-color:transparent}
-    .answer{margin-top:10px;border-radius:12px;padding:16px;border:1px solid var(--line);background:linear-gradient(180deg,#fbfdff,#fff)}
-    .answer h2{margin:0 0 10px;font-size:20px}
-    .answer p{margin:0;color:#1f364d;line-height:1.9}
-    .meta-tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-    .tag{background:rgba(28,156,118,0.08);color:var(--success);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid rgba(28,156,118,0.12)}
-    .sidebar{padding:18px;position:sticky;top:28px}
-    .img-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .main{padding:8px}
+    .controls{display:flex;gap:12px;margin-bottom:12px}
+    .search{flex:1;height:48px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);font-size:15px}
+    .btn{height:48px;padding:0 18px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;font-weight:700;cursor:pointer}
+    .qa-layout{display:grid;grid-template-columns:320px 1fr;gap:18px}
+    .question-list{max-height:56vh;overflow:auto;border-radius:12px;padding:12px;border:1px solid var(--line);background:#fff}
+    .question-item{padding:10px;border-radius:10px;margin-bottom:6px;cursor:pointer;color:var(--text);display:flex;align-items:flex-start;gap:8px}
+    .question-item:hover{background:linear-gradient(90deg,#f6fbff,#fff)}
+    .question-item.active{background:linear-gradient(90deg,var(--primary),var(--primary-2));color:white;font-weight:700}
+    .qid{min-width:34px;height:34px;border-radius:8px;background:rgba(29,99,223,0.06);display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700}
+    .question-text{font-size:14px;line-height:1.4}
+    .answer-area{border-radius:12px;padding:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fbfdff,#fff);min-height:240px}
+    .answer-area h2{margin:0 0 10px;font-size:20px}
+    .answer-area .answer-body{color:#1f364d;line-height:1.9}
+    .refs{margin-top:14px;font-size:13px;color:#7f8fa0}
+    .refs a{color:#6b88c6;text-decoration:underline}
+    .no-results{padding:14px;color:var(--muted)}
+    .note{margin-top:12px;color:var(--muted);font-size:13px}
+    .sidebar .img-grid{display:grid;grid-template-columns:1fr;gap:12px}
     .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
     .img-box img{display:block;width:100%;height:auto}
-    .supported-list{margin-top:12px}
-    .supported-list h3{margin:0 0 8px;font-size:16px}
-    .supported-list ul{margin:0;padding-left:18px;color:var(--muted)}
-    .note{margin-top:12px;color:var(--muted);font-size:13px}
-    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:0}}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative}.qa-layout{grid-template-columns:1fr;}.question-list{max-height:none}}
   </style>
 </head>
 <body>
@@ -43,36 +44,44 @@
       <div class="brand">
         <div class="logo">心</div>
         <div>
-          <div class="title">心血管疾病居家心脏康复问答</div>
-          <div class="subtitle">系统已整合知识图谱与常见问答</div>
+          <div class="title">心血管疾病患者居家心脏康复自我管理知识问答</div>
+          <div class="subtitle">基于国内外权威指南的心血管健康知识科普系统</div>
         </div>
       </div>
       <div class="subtitle">由心血管康复团队维护</div>
     </div>
 
     <main class="panel main" aria-live="polite">
-      <div class="panel-head">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
-          <strong style="font-size:14px;color:var(--muted)">专业问答</strong>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+        <div>
+          <strong style="font-size:16px;color:var(--muted)">心血管疾病患者居家心脏康复自我管理知识问答</strong>
+          <div style="font-size:12px;color:var(--muted)">请点击左侧问题或在搜索框中输入关键词（例如：体重、运动、饮食、服药）</div>
         </div>
       </div>
 
       <div class="controls">
-        <input id="qinput" class="search" placeholder="请输入问题，例如：心力衰竭有哪些常见症状？" />
-        <button id="ask" class="btn">查询</button>
+        <input id="qinput" class="search" placeholder="搜索问题或答案，例如：体重、运动、饮食、服药" aria-label="搜索问题或答案" />
+        <button id="searchBtn" class="btn">搜索</button>
       </div>
 
-      <div style="margin-bottom:6px;color:var(--muted);font-size:13px">常见问题（点击查看答案）</div>
-      <div id="qaChips" class="chips"></div>
+      <div class="qa-layout">
+        <div>
+          <div class="question-list panel" id="questionList" role="list" aria-label="问题列表">
+            <!-- questions injected here -->
+          </div>
+          <div class="note" style="margin-top:8px">共有 <span id="totalCount">0</span> 个问题。点击问题查看答案，移动设备上为上下布局。</div>
+        </div>
 
-      <div style="margin-top:8px;color:var(--muted);font-size:13px">相关主题（知识图谱节点）</div>
-      <div id="topicChips" class="chips"></div>
-
-      <section id="answerArea" class="answer">
-        <h2>支持的问题清单</h2>
-        <p>以下为系统当前支持的问题，您也可以直接输入问题进行检索：</p>
-        <div id="supported" class="supported-list"></div>
-      </section>
+        <div>
+          <section class="answer-area panel" id="answerArea" aria-live="polite">
+            <h2>心血管疾病患者居家心脏康复自我管理知识问答</h2>
+            <div class="answer-body" id="answerBody">
+              <p>请选择左侧问题以查看答案，或通过搜索快速查找。</p>
+            </div>
+            <div class="refs" id="refsArea" aria-label="参考文献"></div>
+          </section>
+        </div>
+      </div>
     </main>
 
     <aside class="panel sidebar">
@@ -87,85 +96,134 @@
         <div class="img-box"><img src="knowledge-graph.png.png" alt="知识图谱（PNG）" /></div>
       </div>
 
-      <div class="note">图片由系统托管，页面仅作展示。QA 与图谱内容由团队维护，已移除调试和临时标记，呈现为正式页面。</div>
+      <div class="note">图片由系统托管，页面仅作展示。QA 内容基于权威指南整理，供科普参考，不替代医疗诊断与个体化建议。</div>
     </aside>
   </div>
 
   <script>
-    // Load data from embedded file (keeps QA logic unchanged). This data file is the source of truth.
-    const knowledgeData = {
-      "title": "心血管疾病患者居家心脏康复自我管理知识图谱",
-      "description": "根据用户提供的知识图谱图片整理。关系采用“包含”，子节点关系为“相关知识点”。图片中的部分小字可能存在识别误差，建议上线前核对。",
-      "triples": [
-        ["自我管理行为","包含","危险因素管理"],["自我管理行为","包含","心理管理"],["自我管理行为","包含","运动管理"],["自我管理行为","包含","饮食管理"],["自我管理行为","包含","药物管理"],["危险因素管理","包含","风险清单"],["危险因素管理","包含","戒烟支持"],["危险因素管理","包含","血压管理"],["危险因素管理","包含","血脂管理"],["危险因素管理","包含","血糖管理"],["危险因素管理","包含","体重评价"],["心理管理","包含","心理疏导"],["心理管理","包含","压力管理"],["心理管理","包含","情绪表达"],["心理管理","包含","专业支持"],["心理管理","包含","家庭支持"],["运动管理","包含","风险分层"],["运动管理","包含","运动处方"],["运动管理","包含","有氧运动"],["运动管理","包含","抗阻训练"],["运动管理","包含","运动反应"],["运动管理","包含","自我监测"],["运动管理","包含","团队联系"],["饮食管理","包含","健康膳食"],["饮食管理","包含","脂肪来源"],["饮食管理","包含","膳食纤维"],["饮食管理","包含","盐与液体"],["饮食管理","包含","营养体重"],["饮食管理","包含","膳食补充剂"],["药物管理","包含","遵循处方"],["药物管理","包含","用药计划"],["药物管理","包含","用药依从"],["药物管理","包含","用药记录"],["药物管理","包含","安全监测"],["药物管理","包含","按需用药"}],
-      "qa":[
-        {"question":"心力衰竭有哪些常见症状？","answer":"心力衰竭常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。","relatedNodes":["自我管理行为","危险因素管理","运动管理"]},
-        {"question":"什么是心力衰竭？","answer":"心力衰竭是指心脏泵血功能异常，导致心脏不能充分满足身体需要，或需要通过较高的充盈压力才能满足需要的一组临床综合征。具体诊断和治疗应由医务人员结合症状、体征及检查结果判断。","relatedNodes":["自我管理行为","药物管理","危险因素管理"]},
-        {"question":"为什么要监测体重？","answer":"对心力衰竭患者而言，定期监测体重有助于发现体液潴留的早期迹象。建议在相近时间、使用相同体重秤并穿着相近衣物测量，按医护人员给出的标准记录；若体重短时间明显增加，应按个体化管理方案联系医护人员。","relatedNodes":["危险因素管理","体重评价","饮食管理","盐与液体"]},
-        {"question":"如何控制心力衰竭？","answer":"心力衰竭管理通常包括遵医嘱用药、监测症状和体重、按医护人员建议管理盐和液体摄入、进行适合自身情况的活动或康复训练，以及管理血压、血糖、血脂和体重。不要自行停药、增减药量或突然开展高强度运动。","relatedNodes":["药物管理","饮食管理","运动管理","危险因素管理","心理管理"]}
-      ]
-    };
+    // Structured Q&A data (29 items) with id, question, answer, source array
+    const QA_DATA = [
+      {"id":1,"question":"心力衰竭是什么？","answer":"心力衰竭是由心脏结构或功能异常引起的一组临床综合征，可导致心脏充盈或泵血能力异常，并出现呼吸困难、乏力、液体潴留等表现。诊断需要结合病史、体格检查及相关检查，不能仅凭单一症状自行判断。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":2,"question":"心力衰竭有哪些常见症状？","answer":"常见表现包括活动后或平卧时呼吸困难、乏力、运动耐量下降、下肢水肿，有些患者会夜间憋醒或咳嗽。不同患者的表现可能不同，症状也可能由其他疾病引起，应由医务人员评估。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"}]},
+      {"id":3,"question":"哪些情况需要尽快就医？","answer":"若出现严重或迅速加重的呼吸困难、持续胸痛、晕厥、意识异常或嘴唇发紫等情况，应立即寻求急救。若气促、水肿或体重较平时明显增加，也应按医护人员提供的行动计划及时联系医疗团队。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":4,"question":"为什么心衰患者要每天监测体重？","answer":"体重在短期内上升可能提示体内液体潴留，是发现病情变化的一个线索。患者可以在相近时间、相似衣着和相同体重秤条件下测量并记录。出现明显变化时，应按照个人管理计划联系医护人员。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":5,"question":"心衰患者怎样正确记录体重？","answer":"建议固定在每天早晨起床后、排尿后、早餐前测量，使用同一台体重秤并记录日期和体重。若无法按照这一时间测量，可与医护人员商定适合自己的固定流程。不要仅凭一次读数自行调整利尿剂或其他药物。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":6,"question":"心衰患者为什么要监测血压和心率？","answer":"血压和心率记录可帮助患者及医护人员了解身体变化，并辅助评估药物耐受性。测量前应安静休息，使用合适尺寸的袖带，按照指导测量并记录。若数值异常且伴随胸痛、晕厥或明显气促，应及时就医。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":7,"question":"心衰患者需要限制盐吗？","answer":"许多心衰患者需要避免高盐饮食，因为钠摄入过多可能加重液体潴留。可减少腌制品、加工食品、咸味零食和额外加盐。具体盐或钠摄入目标应结合病情及医护人员建议制定，不建议自行采取极端限盐措施。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":8,"question":"心衰患者每天能喝多少水？","answer":"液体摄入量需要个体化决定，并非所有心衰患者都必须严格限水。医生会结合症状、血钠、肾功能、用药及液体潴留情况给出建议。患者应遵照个人方案，不要自行大量饮水或过度限水。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":9,"question":"心衰患者适合怎样的饮食？","answer":"总体可以选择蔬菜、水果、全谷物和适量优质蛋白等多样化食物，并减少高盐和高度加工食品。若同时患有糖尿病、肾病或其他疾病，饮食方案应结合相关要求，由专业人员调整。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":10,"question":"心衰患者需要服用营养补充剂吗？","answer":"不建议把营养补充剂当作心衰标准治疗，也不要自行使用所谓护心产品。部分补充剂可能与处方药相互作用，或不适合合并肾功能异常的人群。使用前应向医生或药师说明产品名称和成分。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":11,"question":"心衰患者为什么不能擅自停药？","answer":"心衰药物通常用于改善症状、减少住院风险或改善预后。擅自停药、减量或加量可能导致病情恶化或不良反应。若出现头晕、乏力、咳嗽等疑似药物不良反应，应联系医护人员评估，不要自行更改方案。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":12,"question":"如何提高服药依从性？","answer":"可以使用药盒、手机提醒、固定服药时间表和用药清单，并在复诊时带上所有药物或药物照片。漏服后的处理因药物而异，应查看药品说明或询问医生、药师，不要自行加倍补服。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":13,"question":"心衰患者需要记录哪些用药信息？","answer":"建议记录药品名称、剂量、服用时间、近期调整、漏服情况及可能出现的不适，并更新正在使用的处方药、非处方药和补充剂清单。复诊或急诊时向医护人员出示，有助于核对用药。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":14,"question":"心衰患者可以运动吗？","answer":"病情稳定且经医护人员评估后，许多心衰患者可以参加适合自身能力的规律身体活动或心脏康复。运动类型和强度应个体化；急性加重或静息时明显气促者不应自行开始训练。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"}]},
+      {"id":15,"question":"什么是心脏康复？","answer":"心脏康复是由专业团队指导的综合干预，通常包括运动训练、健康教育、危险因素管理、心理支持及生活方式指导，目标是帮助患者安全活动、改善功能和提升自我管理能力。具体内容应根据诊断和风险评估制定。","source":[{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":16,"question":"心衰患者运动时要注意什么？","answer":"运动前应遵循康复团队制定的计划，循序渐进并做好热身和整理。运动中若出现胸痛、明显气促、头晕、近乎晕厥或异常心悸，应立即停止并按医护人员指导处理。不要自行突然增加运动强度。","source":[{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":17,"question":"什么是有氧运动？","answer":"有氧运动是能持续一段时间、主要调动大肌群的活动，例如步行或固定自行车。心衰患者是否适合、每次多长时间及强度多大，需要根据病情稳定程度和专业评估确定。","source":[{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"}]},
+      {"id":18,"question":"心衰患者可以做抗阻训练吗？","answer":"部分病情稳定的患者经专业评估后可以进行适度抗阻训练，但训练方式、负荷和进阶速度应由康复专业人员指导。若病情近期加重或出现不稳定症状，应先咨询医疗团队。","source":[{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":19,"question":"为什么运动前要做风险评估？","answer":"风险评估有助于了解患者当前症状、功能能力、合并症及运动相关风险，从而选择合适的训练方式和监测措施。不要直接照搬他人的运动处方。","source":[{"name":"2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure","url":"https://academic.oup.com/eurheartj/article/42/36/3599/6358045"}]},
+      {"id":20,"question":"心衰患者怎样识别液体潴留？","answer":"可留意体重短期上升、脚踝或小腿水肿加重、腹胀、呼吸困难增加或夜间憋醒等变化。单个表现并不能独立确诊，应结合个人基线和医护人员制定的行动计划处理。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":21,"question":"吸烟会影响心衰管理吗？","answer":"吸烟会增加心血管风险。心衰患者应尽可能戒烟，并避免二手烟。如果戒烟困难，可以向医疗团队寻求行为支持或合适的戒烟治疗建议。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":22,"question":"饮酒对心衰患者安全吗？","answer":"是否需要完全避免饮酒，取决于心衰病因、病情、药物和其他健康状况。酒精可能与部分心肌病或药物风险有关，因此应向医生确认个人建议，不要把饮酒当作放松或助眠方式。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":23,"question":"心衰患者为什么需要管理血压、血糖和血脂？","answer":"高血压、糖尿病和血脂异常等合并问题可能影响心血管健康与整体预后。患者应按医嘱监测并治疗相关疾病，定期复诊，不要仅依靠自我感觉判断是否控制良好。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":24,"question":"心衰患者如何管理压力和焦虑？","answer":"可以尝试与家人沟通、规律作息和放松训练，并向医护人员说明持续的焦虑、低落或睡眠问题。心理支持可以作为综合照护的一部分；若情绪问题严重影响生活，应寻求专业帮助。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":25,"question":"家属可以怎样帮助心衰患者？","answer":"家属可以协助记录体重和症状、整理药物清单、陪同复诊、支持合理饮食和安全活动，并了解何时需要联系医疗团队。帮助应尊重患者意愿，重要的药物调整仍应由专业人员指导。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":26,"question":"心衰患者为什么要定期复诊？","answer":"复诊可帮助评估症状、体征、血压、肾功能、电解质及治疗耐受性，并根据情况调整管理方案。即使感觉好转，也不应自行停止治疗；具体复诊间隔由医疗团队根据病情决定。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":27,"question":"心衰患者感冒或感染时要注意什么？","answer":"感染可能诱发或加重心衰。若发热、咳嗽或其他感染症状伴随气促加重、明显乏力或水肿，应及时联系医护人员。使用感冒药前应咨询医生或药师，因为部分药物可能不适合心衰患者。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
+      {"id":28,"question":"心衰患者可以自行调整利尿剂吗？","answer":"只有在医疗团队明确提供书面或清晰的个体化调整计划时，患者才应按照该计划行动。否则，不应因体重变化或水肿自行增减利尿剂，因为这可能引起脱水、电解质紊乱或肾功能问题。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":29,"question":"如何建立家庭自我管理清单？","answer":"可将每日体重、症状变化、血压和心率（如医护人员建议）、服药情况、活动和饮食注意事项及紧急联系方法写入清单。清单应使用医疗团队为本人制定的目标和预警标准，并在复诊时更新。","source":[{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"},{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]}
+    ];
 
-    // Render QA chips and supported list
-    const qaChips = document.getElementById('qaChips');
-    const topicChips = document.getElementById('topicChips');
-    const supported = document.getElementById('supported');
-    const answerArea = document.getElementById('answerArea');
-
-    function renderQA(){
-      qaChips.innerHTML = '';
-      knowledgeData.qa.forEach((q,idx)=>{
-        const b=document.createElement('button');b.className='chip';b.textContent=q.question;b.addEventListener('click',()=>showAnswer(idx));qaChips.appendChild(b);
-      });
-
-      // supported list
-      const ul=document.createElement('ul');knowledgeData.qa.forEach(q=>{const li=document.createElement('li');li.textContent=q.question;ul.appendChild(li)});supported.innerHTML='';const h3=document.createElement('h3');h3.textContent='支持的问题清单';supported.appendChild(h3);supported.appendChild(ul);
-    }
-
-    // Extract unique topic nodes from triples
-    function renderTopics(){
-      const nodes=new Set();
-      knowledgeData.triples.forEach(t=>{if(t[0])nodes.add(t[0]);if(t[2])nodes.add(t[2]);});
-      topicChips.innerHTML='';Array.from(nodes).sort().forEach(n=>{const b=document.createElement('button');b.className='chip';b.textContent=n;b.addEventListener('click',()=>searchByTopic(n));topicChips.appendChild(b)});
-    }
-
-    function showAnswer(index){
-      const item=knowledgeData.qa[index];
-      if(!item) return;
-      // highlight active chip
-      document.querySelectorAll('#qaChips .chip').forEach((el,i)=>el.classList.toggle('active',i===index));
-      answerArea.innerHTML=`<h2>${item.question}</h2><p>${item.answer}</p><div class="meta-tags">${(item.relatedNodes||[]).map(n=>`<span class="tag">${n}</span>`).join('')}</div>`;
-    }
-
-    function searchByTopic(topic){
-      // show related QA if any, or show topic info
-      const matched=knowledgeData.qa.filter(q=> (q.relatedNodes||[]).includes(topic));
-      if(matched.length>0){
-        // render first matched
-        const idx=knowledgeData.qa.findIndex(q=>q.question===matched[0].question);
-        showAnswer(idx);
+    // Utility: escape text for safe insertion
+    function textNodeLinesToParagraphs(container, text){
+      container.innerHTML = ''; // clear
+      const parts = String(text).split(/\n+/).map(s=>s.trim()).filter(Boolean);
+      if(parts.length===0){
+        const p = document.createElement('p'); p.textContent = '' ; container.appendChild(p);
       }else{
-        answerArea.innerHTML=`<h2>主题：${topic}</h2><p>该主题来自知识图谱节点，当前暂无专门的问答条目。您可以通过补充问答条目来扩展系统覆盖范围。</p>`;
+        parts.forEach(ptext=>{ const p = document.createElement('p'); p.textContent = ptext; container.appendChild(p); });
       }
     }
 
-    // query by input
-    document.getElementById('ask').addEventListener('click',()=>{
-      const kw=document.getElementById('qinput').value.trim();
-      if(!kw) return;
-      const matchedIndex=knowledgeData.qa.findIndex(q=>q.question.includes(kw) || kw.includes(q.question));
-      if(matchedIndex>-1){showAnswer(matchedIndex);return}
-      // fallback: find by keyword in answer text
-      const matched2=knowledgeData.qa.findIndex(q=>q.answer.includes(kw));
-      if(matched2>-1){showAnswer(matched2);return}
-      answerArea.innerHTML=`<h2>未找到匹配答案</h2><p>系统当前支持的问题包括：</p><div class="note">${knowledgeData.qa.map(q=>q.question).join('；')}</div>`;
-    });
+    // Render question list
+    const questionListEl = document.getElementById('questionList');
+    const totalCountEl = document.getElementById('totalCount');
+    const answerBodyEl = document.getElementById('answerBody');
+    const refsArea = document.getElementById('refsArea');
 
-    // Enter key
-    document.getElementById('qinput').addEventListener('keydown',e=>{if(e.key==='Enter'){document.getElementById('ask').click();}});
+    let filtered = QA_DATA.slice();
+    let activeId = null;
 
-    // initial render
-    renderQA();renderTopics();
+    function renderQuestionList(){
+      questionListEl.innerHTML = '';
+      filtered.forEach(item=>{
+        const div = document.createElement('div'); div.className = 'question-item'; div.setAttribute('role','listitem'); div.dataset.id = item.id;
+        if(item.id === activeId) div.classList.add('active');
+        const qid = document.createElement('div'); qid.className='qid'; qid.textContent = item.id;
+        const qtxt = document.createElement('div'); qtxt.className='question-text'; qtxt.textContent = item.question;
+        div.appendChild(qid); div.appendChild(qtxt);
+        div.addEventListener('click', ()=>{ showAnswerById(item.id); });
+        questionListEl.appendChild(div);
+      });
+      totalCountEl.textContent = filtered.length;
+      if(filtered.length===0){
+        const no = document.createElement('div'); no.className='no-results'; no.textContent = '未找到匹配的问题。请尝试其他关键词。';
+        questionListEl.appendChild(no);
+      }
+    }
+
+    function showAnswerById(id){
+      const item = QA_DATA.find(q=>q.id === id);
+      if(!item) return;
+      activeId = id;
+      // update active class
+      document.querySelectorAll('.question-item').forEach(el=>el.classList.toggle('active', Number(el.dataset.id)===id));
+      // render answer safely
+      textNodeLinesToParagraphs(answerBodyEl, item.answer);
+      // render references
+      refsArea.innerHTML = '';
+      const refTitle = document.createElement('div'); refTitle.style.fontWeight='700'; refTitle.style.marginBottom='6px'; refTitle.textContent = '参考来源：';
+      refsArea.appendChild(refTitle);
+      item.source.forEach(s=>{
+        const link = document.createElement('div'); link.style.marginTop='6px';
+        const a = document.createElement('a'); a.href = s.url; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent = s.name;
+        link.appendChild(a);
+        refsArea.appendChild(link);
+      });
+      // scroll selected question into view
+      const activeEl = document.querySelector(`.question-item[data-id="${id}"]`);
+      if(activeEl) activeEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+
+    // Search implementation: search in question and answer (case-insensitive)
+    function performSearch(raw){
+      const kw = String(raw || '').trim();
+      if(!kw){ filtered = QA_DATA.slice(); renderQuestionList(); return; }
+      const low = kw.toLowerCase();
+      filtered = QA_DATA.filter(item=>{
+        return item.question.toLowerCase().includes(low) || item.answer.toLowerCase().includes(low);
+      });
+      // If exact id typed like "1" navigate directly
+      const asNum = Number(kw);
+      if(!isNaN(asNum) && asNum>0){ const direct = QA_DATA.find(q=>q.id===asNum); if(direct){ filtered = [direct]; }}
+      renderQuestionList();
+      if(filtered.length===1){ showAnswerById(filtered[0].id); }
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', ()=>{ performSearch(document.getElementById('qinput').value); });
+    document.getElementById('qinput').addEventListener('keydown', e=>{ if(e.key === 'Enter'){ performSearch(e.target.value); } });
+
+    // Initial render
+    filtered = QA_DATA.slice(); renderQuestionList(); // show first item by default
+
+    // Accessibility: if user arrives via hash like #q5
+    (function checkHash(){
+      try{
+        const h = location.hash.replace('#',''); if(h){ const num = Number(h.replace(/^q/i,'')); if(!isNaN(num)){ const q = QA_DATA.find(it=>it.id===num); if(q){ showAnswerById(q.id); return; } }}
+      }catch(e){}
+      // otherwise show first
+      if(QA_DATA.length>0) showAnswerById(QA_DATA[0].id);
+    })();
   </script>
 </body>
 </html>
