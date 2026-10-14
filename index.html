@@ -6,11 +6,12 @@
   <title>心血管疾病患者居家心脏康复自我管理知识问答</title>
   <style>
     :root{--bg-1:#eef4ff;--bg-2:#f8fbff;--panel:rgba(255,255,255,0.96);--line:rgba(131,161,206,0.18);--text:#18314a;--muted:#64809d;--primary:#1d63df;--primary-2:#4a9bff;--success:#1c9c76;--radius-xl:14px;--shadow:0 6px 24px rgba(29,99,223,0.06)}
-    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);} 
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%)}
     .layout{max-width:1200px;margin:24px auto;display:grid;grid-template-columns:1fr 360px;gap:24px;padding:0 16px}
     .header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden}
+    .logo img{width:28px;height:28px;display:block}
     .title{font-size:20px;font-weight:800}
     .subtitle{color:var(--muted);font-size:12px}
     .panel{background:var(--panel);border-radius:var(--radius-xl);padding:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -32,8 +33,8 @@
     .refs a{color:#6b88c6;text-decoration:underline}
     .no-results{padding:14px;color:var(--muted)}
     .note{margin-top:12px;color:var(--muted);font-size:13px}
-    .sidebar .img-grid{display:grid;grid-template-columns:1fr;gap:12px}
-    .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
+    .sidebar .img-grid{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;max-width:320px;width:100%}
     .img-box img{display:block;width:100%;height:auto}
     @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative}.qa-layout{grid-template-columns:1fr;}.question-list{max-height:none}}
   </style>
@@ -42,7 +43,7 @@
   <div class="layout">
     <div class="header">
       <div class="brand">
-        <div class="logo">心</div>
+        <div class="logo"><img src="assets/heart.svg" alt="爱心" /></div>
         <div>
           <div class="title">心血管疾病患者居家心脏康复自我管理知识问答</div>
           <div class="subtitle">基于国内外权威指南的心血管健康知识科普系统</div>
@@ -91,8 +92,6 @@
       </div>
 
       <div class="img-grid">
-        <div class="img-box"><img src="knowledge-graph.svg" alt="知识图谱（SVG）" /></div>
-        <div class="img-box"><img src="knowledge-map.svg" alt="知识地图（SVG）" /></div>
         <div class="img-box"><img src="knowledge-graph.png.png" alt="知识图谱（PNG）" /></div>
       </div>
 
@@ -120,7 +119,7 @@
       {"id":15,"question":"什么是心脏康复？","answer":"心脏康复是由专业团队指导的综合干预，通常包括运动训练、健康教育、危险因素管理、心理支持及随访。","source":[{"name":"心脏康复指南","url":"https://example.org"}]},
       {"id":16,"question":"心衰患者运动时要注意什么？","answer":"运动前应遵循康复团队制定的计划，循序渐进并做好热身和整理。运动中若出现胸痛、明显气促等应停止并就医。","source":[{"name":"运动安全","url":"https://example.org"}]},
       {"id":17,"question":"什么是有氧运动？","answer":"有氧运动是能持续一段时间、主要调动大肌群的活动，例如步行或固定自行车。是否适合需由专业评估决定。","source":[{"name":"运动种类说明","url":"https://example.org"}]},
-      {"id":18,"question":"心衰患者可以做抗阻训练吗？","answer":"部分病情稳定的患者经专业评估后可以进行适度抗阻训练，但训练方式和强度需个体化。","source":[{"name":"抗阻训练建议","url":"https://example.org"}]},
+      {"id":18,"question":"心衰患者可以做抗阻训练吗？","answer":"部分病情稳定的患者经专业评估后可以进行适度抗阻训练，但��练方式和强度需个体化。","source":[{"name":"抗阻训练建议","url":"https://example.org"}]},
       {"id":19,"question":"为什么运动前要做风险评估？","answer":"风险评估有助于了解患者当前症状、功能能力、合并症及运动相关风险，从而选择合适的运动处方。","source":[{"name":"风险评估","url":"https://example.org"}]},
       {"id":20,"question":"心衰患者怎样识别液体潴留？","answer":"可留意体重短期上升、脚踝或小腿水肿加重、腹胀、呼吸困难增加或夜间憋醒等变化。","source":[{"name":"液体潴留识别","url":"https://example.org"}]},
       {"id":21,"question":"吸烟会影响心衰管理吗？","answer":"吸烟会增加心血管风险。心衰患者应尽可能戒烟，并避免二手烟。","source":[{"name":"戒烟与心血管","url":"https://example.org"}]},
@@ -128,24 +127,22 @@
       {"id":23,"question":"心衰患者为什么需要管理血压、血糖和血脂？","answer":"高血压、糖尿病和血脂异常等合并问题可能影响心血管健康与整体预后。","source":[{"name":"危险因素管理","url":"https://example.org"}]},
       {"id":24,"question":"心衰患者如何管理压力和焦虑？","answer":"可以尝试与家人沟通、规律作息和放松训练，并向医护人员说明持续的焦虑或抑郁症状。","source":[{"name":"心理管理","url":"https://example.org"}]},
       {"id":25,"question":"家属可以怎样帮助心衰患者？","answer":"家属可以协助记录体重和症状、整理药物清单、陪同复诊、支持合理饮食和安全活动，并给予心理支持。","source":[{"name":"家庭支持","url":"https://example.org"}]},
-      {"id":26,"question":"心衰患者为什么要定期复诊？","answer":"复诊可帮助评估症状、体���、血压、肾功能、电解质及治疗耐受性，并根据情况调整管理。","source":[{"name":"复诊建议","url":"https://example.org"}]},
+      {"id":26,"question":"心衰患者为什么要定期复诊？","answer":"复诊可帮助评估症状、体征、血压、肾功能、电解质及治疗耐受性，并根据情况调整管理。","source":[{"name":"复诊建议","url":"https://example.org"}]},
       {"id":27,"question":"心衰患者感冒或感染时要注意什么？","answer":"感染可能诱发或加重心衰。若发热、咳嗽或其他感染症状伴随气促加重、明显乏力或意识改变，应及时就医。","source":[{"name":"感染管理","url":"https://example.org"}]},
       {"id":28,"question":"心衰患者可以自行调整利尿剂吗？","answer":"只有在医疗团队明确提供书面或清晰的个体化调整计划时，患者才应按照该计划行动。","source":[{"name":"利尿剂调整","url":"https://example.org"}]},
       {"id":29,"question":"如何建立家庭自我管理清单？","answer":"可将每日体重、症状变化、血压和心率（如医护人员建议）、服药情况、活动和饮食注意事项记录下来并随访。","source":[{"name":"自我管理清单","url":"https://example.org"}]}
     ];
 
-    // Utility: escape text for safe insertion
     function textNodeLinesToParagraphs(container, text){
-      container.innerHTML = ''; // clear
+      container.innerHTML = '';
       const parts = String(text).split(/\n+/).map(s=>s.trim()).filter(Boolean);
       if(parts.length===0){
-        const p = document.createElement('p'); p.textContent = '' ; container.appendChild(p);
-      }else{
+        const p = document.createElement('p'); p.textContent = ''; container.appendChild(p);
+      } else {
         parts.forEach(ptext=>{ const p = document.createElement('p'); p.textContent = ptext; container.appendChild(p); });
       }
     }
 
-    // Render question list
     const questionListEl = document.getElementById('questionList');
     const totalCountEl = document.getElementById('totalCount');
     const answerBodyEl = document.getElementById('answerBody');
@@ -176,11 +173,8 @@
       const item = QA_DATA.find(q=>q.id === id);
       if(!item) return;
       activeId = id;
-      // update active class
       document.querySelectorAll('.question-item').forEach(el=>el.classList.toggle('active', Number(el.dataset.id)===id));
-      // render answer safely
       textNodeLinesToParagraphs(answerBodyEl, item.answer);
-      // render references
       refsArea.innerHTML = '';
       const refTitle = document.createElement('div'); refTitle.style.fontWeight='700'; refTitle.style.marginBottom='6px'; refTitle.textContent = '参考来源：';
       refsArea.appendChild(refTitle);
@@ -190,20 +184,15 @@
         link.appendChild(a);
         refsArea.appendChild(link);
       });
-      // scroll selected question into view
       const activeEl = document.querySelector(`.question-item[data-id="${id}"]`);
       if(activeEl) activeEl.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
 
-    // Search implementation: search in question and answer (case-insensitive)
     function performSearch(raw){
       const kw = String(raw || '').trim();
       if(!kw){ filtered = QA_DATA.slice(); renderQuestionList(); return; }
       const low = kw.toLowerCase();
-      filtered = QA_DATA.filter(item=>{
-        return item.question.toLowerCase().includes(low) || item.answer.toLowerCase().includes(low);
-      });
-      // If exact id typed like "1" navigate directly
+      filtered = QA_DATA.filter(item=>item.question.toLowerCase().includes(low) || item.answer.toLowerCase().includes(low));
       const asNum = Number(kw);
       if(!isNaN(asNum) && asNum>0){ const direct = QA_DATA.find(q=>q.id===asNum); if(direct){ filtered = [direct]; }}
       renderQuestionList();
@@ -213,15 +202,11 @@
     document.getElementById('searchBtn').addEventListener('click', ()=>{ performSearch(document.getElementById('qinput').value); });
     document.getElementById('qinput').addEventListener('keydown', e=>{ if(e.key === 'Enter'){ performSearch(e.target.value); } });
 
-    // Initial render
-    filtered = QA_DATA.slice(); renderQuestionList(); // show first item by default
-
-    // Accessibility: if user arrives via hash like #q5
+    filtered = QA_DATA.slice(); renderQuestionList();
     (function checkHash(){
       try{
-        const h = location.hash.replace('#',''); if(h){ const num = Number(h.replace(/^q/i,'')); if(!isNaN(num)){ const q = QA_DATA.find(it=>it.id===num); if(q){ showAnswerById(q.id); return; } }
-      }catch(e){}
-      // otherwise show first
+        const h = location.hash.replace('#',''); if(h){ const num = Number(h.replace(/^q/i,'')); if(!isNaN(num)){ const q = QA_DATA.find(it=>it.id===num); if(q){ showAnswerById(q.id); return; } }}
+      } catch(e){}
       if(QA_DATA.length>0) showAnswerById(QA_DATA[0].id);
     })();
   </script>
