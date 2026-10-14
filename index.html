@@ -1,16 +1,382 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>心血管疾病患者居家心脏康复自我管理行为智能问答系统</title>
-<style>
-:root{--blue:#287cf0;--dark:#203452;--line:#dce8f8;--bg:#f4f8ff}*{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff,#f8fafc);color:#24364f}.app{max-width:960px;margin:40px auto;padding:0 16px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 30px #3977b21c}.header{padding:28px;background:linear-gradient(#fff,#f3f8ff);border-bottom:1px solid var(--line)}h1{text-align:center;margin:0;color:#1d2f50;font-size:clamp(24px,4vw,36px)}.subtitle{text-align:center;color:#61738c;margin:10px 0 20px;font-weight:bold}.query{display:flex;gap:10px;max-width:760px;margin:auto;padding:9px 10px 9px 16px;background:#f8fbff;border:1px solid var(--line);border-radius:15px}.query input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:16px}.query button{border:0;border-radius:11px;padding:12px 20px;background:var(--blue);color:white;font-size:15px;font-weight:bold;cursor:pointer}.examples{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:16px}.examples button{border:1px solid #d8e6fb;background:#edf4ff;color:#3263a7;border-radius:20px;padding:8px 14px;cursor:pointer}.panel{padding:22px 28px}.title{font-size:19px;font-weight:bold;color:var(--dark);margin:0 0 14px}.answer{min-height:118px;padding:20px;background:linear-gradient(#fbfdff,#edf7ff);border:1px solid var(--line);border-radius:15px;line-height:1.9;font-size:16px}.graph{margin-top:22px;padding:20px;border:1px solid var(--line);border-radius:16px;text-align:center}.graph img{width:100%;max-width:800px;height:auto;display:block;margin:0 auto;border-radius:12px}.source{color:#65758b;margin-top:18px;font-size:14px}@media(max-width:600px){.header,.panel{padding-left:16px;padding-right:16px}.query{flex-direction:column}.query button{width:100%}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>心血管疾病患者居家心脏康复自我管理行为智能问答系统</title>
+  <style>
+    :root {
+      --blue: #287cf0;
+      --dark: #203452;
+      --line: #dce8f8;
+      --bg: #f4f8ff;
+      --panel: #ffffff;
+      --soft: #eef5ff;
+      --text: #1d2a3a;
+      --muted: #5b6d86;
+      --success: #1a9a6f;
+      --warning: #f0a429;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background: linear-gradient(180deg, #edf5ff 0%, #f7fafc 100%);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(35, 92, 173, 0.08);
+      padding: 28px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 36px);
+      color: var(--dark);
+    }
+
+    .tag {
+      background: var(--soft);
+      color: var(--blue);
+      border: 1px solid rgba(40, 124, 240, 0.2);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .meta {
+      background: #f7fbff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-item strong {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .meta-item span {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--dark);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      flex: 1;
+      min-width: 220px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0 16px;
+      font-size: 16px;
+      color: var(--text);
+      background: #fff;
+    }
+
+    button {
+      height: 48px;
+      border: none;
+      border-radius: 12px;
+      padding: 0 20px;
+      background: linear-gradient(135deg, var(--blue), #4da1ff);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .question-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .question-chip {
+      background: #edf5ff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--dark);
+      transition: all 0.15s ease;
+    }
+
+    .question-chip:hover,
+    .question-chip.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .answer-box {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fbfdff, #f4f9ff);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .answer-box h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      color: var(--dark);
+    }
+
+    .answer-content {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .answer-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .node-badge {
+      display: inline-block;
+      background: #eaf8f2;
+      color: var(--success);
+      border: 1px solid rgba(26, 154, 111, 0.2);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .card { padding: 18px; }
+      .controls { display: block; }
+      .controls input, .controls button { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-<main class="app"><section class="card"><header class="header"><h1>❤️ 心血管疾病患者居家心脏康复自我管理行为智能问答系统</h1><div class="subtitle">基于知识图谱的心血管健康知识问答</div><div class="query"><input id="q" value="心力衰竭有哪些常见症状？" placeholder="请输入你的问题"><button onclick="ask()">🔍 提问</button></div><div class="examples"><button onclick="use(this)">什么是心力衰竭？</button><button onclick="use(this)">心力衰竭有哪些常见症状？</button><button onclick="use(this)">为什么要监测体重？</button><button onclick="use(this)">如何控制心力衰竭？</button></div></header><section class="panel"><h2 class="title">💡 科普回答</h2><div id="answer" class="answer">常见表现包括呼吸困难、乏力以及下肢水肿等。若症状加重，可能出现夜间憋醒、活动耐量下降或体重明显增加，需尽早就医评估。</div><div class="graph"><h2 class="title">🕸️ 相关知识</h2><img src="https://raw.githubusercontent.com/gxn14/heart-health-qa/main/knowledge-graph.png.png" alt="心血管健康知识图谱" style="width:100%;max-width:800px;border-radius:12px;"></div><div class="source">📚 知识来源：相关健康科普资料</div></section></section></main>
-<script>
-const answers=[['什么是心力衰竭','心力衰竭是指心脏泵血功能下降，无法满足身体需要。它常见于高血压、冠心病、瓣膜病和心肌病等基础疾病之后。'],['症状','常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。严重时还可能出现体重快速增加、食欲下降、心悸等表现。'],['体重','体重快速增加往往提示液体潴留，是心力衰竭病情变化的重要信号。建议每天固定时间监测体重，若短期内增加明显，应及时联系医生。'],['控制','控制心力衰竭需要综合管理，包括遵医嘱规律服药、控制盐摄入、适度活动、监测体重和定期复查。']];function ask(){let q=document.getElementById('q').value, a=answers.find(x=>q.includes(x[0]));document.getElementById('answer').textContent=a?a[1]:'建议咨询医生或输入"症状""体重""控制"等相关问题。本文仅供健康科普，不能替代医生诊断。'}function use(e){document.getElementById('q').value=e.textContent;ask()}document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});ask();
-</script>
-</body></html>
+  <main class="app">
+    <section class="card">
+      <header class="header">
+        <h1>❤️ 心血管疾病患者居家心脏康复自我管理行为智能问答系统</h1>
+        <div class="tag">知识图谱 + 问答检索</div>
+      </header>
+
+      <div class="meta">
+        <div class="meta-item">
+          <strong>主题</strong>
+          <span>心血管疾病患者居家心脏康复自我管理</span>
+        </div>
+        <div class="meta-item">
+          <strong>核心知识</strong>
+          <span>自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="questionInput" type="text" placeholder="请输入问题，如：心力衰竭有哪些常见症状？" />
+        <button id="askBtn" type="button">查询答案</button>
+      </div>
+
+      <div id="questionList" class="question-list"></div>
+
+      <article id="answerBox" class="answer-box" aria-live="polite">
+        <h2>系统已支持的问题</h2>
+        <div class="answer-content">可在上方输入问题，或点击下列问题标签快速查看对应答案。</div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const knowledgeData = {
+      "title": "心血管疾病患者居家心脏康复自我管理知识图谱",
+      "description": "根据用户提供的知识图谱图片整理。关系采用“包含”，子节点关系为“相关知识点”。图片中的部分小字可能存在识别误差，建议上线前核对。",
+      "triples": [
+        ["自我管理行为", "包含", "危险因素管理"],
+        ["自我管理行为", "包含", "心理管理"],
+        ["自我管理行为", "包含", "运动管理"],
+        ["自我管理行为", "包含", "饮食管理"],
+        ["自我管理行为", "包含", "药物管理"],
+        ["危险因素管理", "包含", "风险清单"],
+        ["危险因素管理", "包含", "戒烟支持"],
+        ["危险因素管理", "包含", "血压管理"],
+        ["危险因素管理", "包含", "血脂管理"],
+        ["危险因素管理", "包含", "血糖管理"],
+        ["危险因素管理", "包含", "体重评价"],
+        ["心理管理", "包含", "心理疏导"],
+        ["心理管理", "包含", "压力管理"],
+        ["心理管理", "包含", "情绪表达"],
+        ["心理管理", "包含", "专业支持"],
+        ["心理管理", "包含", "家庭支持"],
+        ["运动管理", "包含", "风险分层"],
+        ["运动管理", "包含", "运动处方"],
+        ["运动管理", "包含", "有氧运动"],
+        ["运动管理", "包含", "抗阻训练"],
+        ["运动管理", "包含", "运动反应"],
+        ["运动管理", "包含", "自我监测"],
+        ["运动管理", "包含", "团队联系"],
+        ["饮食管理", "包含", "健康膳食"],
+        ["饮食管理", "包含", "脂肪来源"],
+        ["饮食管理", "包含", "膳食纤维"],
+        ["饮食管理", "包含", "盐与液体"],
+        ["饮食管理", "包含", "营养体重"],
+        ["饮食管理", "包含", "膳食补充剂"],
+        ["药物管理", "包含", "遵循处方"],
+        ["药物管理", "包含", "用药计划"],
+        ["药物管理", "包含", "用药依从"],
+        ["药物管理", "包含", "用药记录"],
+        ["药物管理", "包含", "安全监测"],
+        ["药物管理", "包含", "按需用药"]
+      ],
+      "qa": [
+        {
+          "question": "心力衰竭有哪些常见症状？",
+          "answer": "心力衰竭常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。",
+          "relatedNodes": ["自我管理行为", "危险因素管理", "运动管理"]
+        },
+        {
+          "question": "什么是心力衰竭？",
+          "answer": "心力衰竭是指心脏泵血功能异常，导致心脏不能充分满足身体需要，或需要通过较高的充盈压力才能满足需要的一组临床综合征。具体诊断和治疗应由医务人员结合症状、体征及检查结果判断。",
+          "relatedNodes": ["自我管理行为", "药物管理", "危险因素管理"]
+        },
+        {
+          "question": "为什么要监测体重？",
+          "answer": "对心力衰竭患者而言，定期监测体重有助于发现体液潴留的早期迹象。建议在相近时间、使用相同体重秤并穿着相近衣物测量，按医护人员给出的标准记录；若体重短时间明显增加，应按个体化管理方案联系医护人员。",
+          "relatedNodes": ["危险因素管理", "体重评价", "饮食管理", "盐与液体"]
+        },
+        {
+          "question": "如何控制心力衰竭？",
+          "answer": "心力衰竭管理通常包括遵医嘱用药、监测症状和体重、按医护人员建议管理盐和液体摄入、进行适合自身情况的活动或康复训练，以及管理血压、血糖、血脂和体重。不要自行停药、增减药量或突然开展高强度运动。",
+          "relatedNodes": ["药物管理", "饮食管理", "运动管理", "危险因素管理", "心理管理"]
+        }
+      ]
+    };
+
+    const questionInput = document.getElementById('questionInput');
+    const askBtn = document.getElementById('askBtn');
+    const questionList = document.getElementById('questionList');
+    const answerBox = document.getElementById('answerBox');
+
+    function renderQuestionChips() {
+      const items = knowledgeData.qa;
+      questionList.innerHTML = '';
+
+      items.forEach((item, index) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'question-chip';
+        chip.textContent = item.question;
+        chip.addEventListener('click', () => showQuestion(item.question, index));
+        questionList.appendChild(chip);
+      });
+    }
+
+    function showQuestion(questionText, activeIndex = -1) {
+      const matched = knowledgeData.qa.find(item => item.question === questionText) || knowledgeData.qa.find(item => item.question.includes(questionText) || questionText.includes(item.question));
+
+      if (!matched) {
+        answerBox.innerHTML = `
+          <h2>未找到匹配答案</h2>
+          <div class="answer-content">当前系统已覆盖的主要问题包括：${knowledgeData.qa.map(item => item.question).join('；')}。如需进一步扩展，可继续补充新的知识条目。</div>
+        `;
+        return;
+      }
+
+      const chips = document.querySelectorAll('.question-chip');
+      chips.forEach((chip, idx) => {
+        chip.classList.toggle('active', idx === activeIndex || chip.textContent === matched.question);
+      });
+
+      const nodeHtml = (matched.relatedNodes || []).map(node => `<span class="node-badge">${node}</span>`).join('');
+      answerBox.innerHTML = `
+        <h2>${matched.question}</h2>
+        <div class="answer-content">${matched.answer}</div>
+        <div class="answer-meta">${nodeHtml}</div>
+      `;
+    }
+
+    function searchQuestion() {
+      const keyword = questionInput.value.trim();
+      if (!keyword) {
+        answerBox.innerHTML = `
+          <h2>系统已支持的问题</h2>
+          <div class="answer-content">请输入问题后再查询，例如：心力衰竭有哪些常见症状？</div>
+        `;
+        return;
+      }
+
+      const normalized = keyword.toLowerCase();
+      const matched = knowledgeData.qa.find(item => {
+        const q = item.question.toLowerCase();
+        return q.includes(normalized) || normalized.includes(q);
+      });
+
+      if (matched) {
+        const idx = knowledgeData.qa.findIndex(item => item.question === matched.question);
+        showQuestion(matched.question, idx);
+      } else {
+        answerBox.innerHTML = `
+          <h2>未找到匹配答案</h2>
+          <div class="answer-content">当前系统暂无该问题的标准答案。建议参考知识图谱中的：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理等节点，并继续补充问答。</div>
+        `;
+      }
+    }
+
+    askBtn.addEventListener('click', searchQuestion);
+    questionInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        searchQuestion();
+      }
+    });
+
+    renderQuestionChips();
+  </script>
+</body>
+</html>
