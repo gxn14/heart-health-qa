@@ -5,159 +5,417 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>心血管疾病患者居家心脏康复自我管理行为智能问答系统</title>
   <style>
-    /* Polished medical QA look: clean, calm colors, clear hierarchy, improved spacing */
-    :root{
-      --bg:#f6f8fb;
-      --panel:#ffffff;
-      --muted:#6b7a90;
-      --accent:#2469f0;
-      --accent-2:#3aa0ff;
-      --success:#1a9a6f;
-      --line:#e6eefc;
-      --glass:rgba(255,255,255,0.6);
-      --radius:16px;
-      --shadow: 0 10px 30px rgba(29,42,58,0.08);
+    :root {
+      --bg-1: #edf4ff;
+      --bg-2: #f8fbff;
+      --panel: rgba(255,255,255,0.78);
+      --panel-strong: rgba(255,255,255,0.94);
+      --line: rgba(131, 161, 206, 0.2);
+      --line-strong: rgba(110, 141, 202, 0.28);
+      --text: #18314a;
+      --muted: #64809d;
+      --primary: #1d63df;
+      --primary-2: #4a9bff;
+      --primary-3: #0d4cbc;
+      --success: #1c9c76;
+      --success-soft: rgba(28,156,118,0.12);
+      --shadow: 0 20px 48px rgba(18, 40, 75, 0.1);
+      --shadow-soft: 0 12px 24px rgba(26, 69, 133, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-      background:linear-gradient(180deg, #f4f7fb 0%, var(--bg) 100%);
-      color:#122033;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(100,155,255,0.14), transparent 18%),
+        radial-gradient(circle at 90% 10%, rgba(103,204,226,0.12), transparent 16%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 30px 26px;
     }
 
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns: 1fr 380px;
-      gap:24px;
-      align-items:start;
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.75fr) minmax(290px, 0.85fr);
+      gap: 26px;
+      align-items: start;
     }
 
-    header.appbar{
-      grid-column:1/-1;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      margin-bottom:6px;
+    .topbar {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 8px 2px;
     }
 
-    .brand{
-      display:flex;align-items:center;gap:12px
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .logo{
-      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(36,105,240,0.18)
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #1c69eb 0%, #5aa8ff 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 14px 26px rgba(31, 100, 220, 0.2);
     }
 
-    .title {font-size:18px;font-weight:700}
-    .subtitle{color:var(--muted);font-size:13px}
-
-    .card{
-      background:var(--panel);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow);
-      border:1px solid var(--line);
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    /* Left main panel */
-    .main-card{padding:22px 22px 18px}
-
-    .controls{
-      display:flex;gap:12px;align-items:center;margin-bottom:18px
+    .brand-title {
+      font-size: clamp(22px, 2vw, 30px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #17314c;
     }
 
-    #questionInput{
-      flex:1;height:52px;border-radius:12px;padding:12px 16px;border:1px solid var(--line);font-size:16px;background:linear-gradient(180deg,#fff,#fbfdff)
+    .brand-sub {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
     }
 
-    button#askBtn{height:52px;padding:0 18px;border-radius:12px;border:none;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(36,105,240,0.18)}
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #345381;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 14px;
+      box-shadow: var(--shadow-soft);
+    }
 
-    .hint {color:var(--muted);font-size:13px;margin-bottom:10px}
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 6px rgba(28,156,118,0.12);
+    }
 
-    .question-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
-    .question-chip{background:#f5f9ff;border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:13px;color:#17314a;cursor:pointer;transition:all .12s}
-    .question-chip:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(51,102,187,0.08)}
-    .question-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
 
-    .answer-box{margin-top:6px;padding:18px;border-radius:12px;background:linear-gradient(180deg,#fbfdff,#f7fbff);border:1px solid var(--line)}
-    .answer-box h2{margin:0 0 10px;font-size:18px}
-    .answer-content{font-size:15px;line-height:1.8;color:#182533}
+    .main-panel {
+      padding: 24px 24px 20px;
+      min-height: 620px;
+    }
 
-    .answer-meta{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
-    .node-badge{padding:6px 10px;border-radius:999px;background:#eef9f3;color:var(--success);border:1px solid rgba(26,154,111,0.12);font-weight:600;font-size:13px}
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
 
-    /* Right sidebar */
-    .sidebar{position:sticky;top:28px;align-self:start}
-    .kg-preview{display:flex;flex-direction:column;gap:12px}
-    .kg-preview img{width:100%;border-radius:10px;border:1px solid var(--line)}
-    .kg-meta{font-size:13px;color:var(--muted)}
+    .panel-headline {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-    /* subtle footer */
-    footer.note{grid-column:1/-1;margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+    .mini-label {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(20, 105, 235, 0.08);
+      border: 1px solid rgba(20, 105, 235, 0.12);
+      color: var(--primary-3);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
 
-    @media (max-width:980px){
-      .container{grid-template-columns:1fr;}
-      .sidebar{position:relative;order:2}
+    .search-row {
+      display: flex;
+      gap: 12px;
+      margin: 18px 0 16px;
+    }
+
+    .search-box {
+      flex: 1;
+      height: 58px;
+      border-radius: 16px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.9);
+      box-shadow: inset 0 1px 2px rgba(17,33,54,0.03);
+      padding: 0 18px;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .search-box:focus {
+      border-color: rgba(29,99,223,0.5);
+      box-shadow: 0 0 0 4px rgba(29,99,223,0.08);
+    }
+
+    .search-btn {
+      min-width: 145px;
+      height: 58px;
+      border: none;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+      box-shadow: 0 16px 26px rgba(29,99,223,0.18);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 30px rgba(29,99,223,0.22);
+    }
+
+    .question-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .question-chip {
+      border: 1px solid var(--line);
+      background: rgba(243,248,255,0.9);
+      color: #22415e;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 12px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .question-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(29,99,223,0.2);
+    }
+
+    .question-chip.active {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 12px 20px rgba(29,99,223,0.17);
+    }
+
+    .answer-box {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(246,250,255,0.96), rgba(255,255,255,0.95));
+      padding: 22px 20px 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.67);
+    }
+
+    .answer-box::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: -30px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,155,255,0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    .answer-box h2 {
+      position: relative;
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: #17314d;
+    }
+
+    .answer-content {
+      position: relative;
+      font-size: 15px;
+      line-height: 2;
+      color: #1f2f45;
+    }
+
+    .answer-meta {
+      position: relative;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .node-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid rgba(28,156,118,0.18);
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .node-badge::before {
+      content: "●";
+      font-size: 8px;
+      opacity: 0.9;
+    }
+
+    .side-panel {
+      padding: 18px 18px 16px;
+      position: sticky;
+      top: 28px;
+    }
+
+    .side-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-weight: 700;
+      color: #17314d;
+    }
+
+    .side-panel-header span:last-child {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .kg-frame {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .kg-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 720px;
+      object-fit: contain;
+      background: linear-gradient(180deg, #f8fbff, #fff);
+    }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: rgba(29,99,223,0.04);
+      border: 1px solid rgba(29,99,223,0.1);
+      color: #375b91;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 980px) {
+      .page { grid-template-columns: 1fr; }
+      .side-panel { position: relative; top: 0; }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 20px 14px; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .search-row { flex-direction: column; }
+      .search-btn { width: 100%; }
+      .main-panel { padding: 18px 15px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="appbar">
+  <div class="page">
+    <header class="topbar">
       <div class="brand">
-        <div class="logo">心</div>
-        <div>
-          <div class="title">心血管疾病患者居家心脏康复自我管理问答</div>
-          <div class="subtitle">基于知识图谱的智能问答 — 视觉更新（仅外观）</div>
+        <div class="brand-mark">心</div>
+        <div class="brand-copy">
+          <div class="brand-title">心血管健康知识问答</div>
+          <div class="brand-sub">Cardiac Recovery Knowledge</div>
         </div>
       </div>
-      <div class="meta-info" aria-hidden>
-        <span style="color:var(--muted);font-size:13px">已加载：知识图谱 + {问答条目数}</span>
-      </div>
+      <div class="status-pill"><span class="status-dot"></span> 知识库已更新</div>
     </header>
 
-    <main class="card main-card" aria-live="polite">
-      <div class="hint">在下方输入问题或点击示例问题，系统将从知识库中检索最匹配的答案（说明：我不会修改问答逻辑或知识图谱图片）。</div>
+    <main class="panel main-panel" aria-live="polite">
+      <div class="panel-header">
+        <div class="panel-headline">专业问答</div>
+        <div class="mini-label">知识检索</div>
+      </div>
 
-      <div class="controls">
-        <input id="questionInput" type="text" placeholder="请输入问题，例如：心力衰竭有哪些常见症状？" />
-        <button id="askBtn">查询答案</button>
+      <div class="search-row">
+        <input id="questionInput" class="search-box" type="text" placeholder="请输入问题，例如：心力衰竭有哪些常见症状？" />
+        <button id="askBtn" class="search-btn" type="button">查询答案</button>
       </div>
 
       <div id="questionList" class="question-list" aria-label="常见问题"></div>
 
       <article id="answerBox" class="answer-box">
         <h2>系统已支持的问题</h2>
-        <div class="answer-content">可在上方输入问题，或点击上方的示例问题标签快速查看对应答案。</div>
+        <div class="answer-content">可在上方输入问题，或点击示例问题标签快速查看对应答案。</div>
       </article>
     </main>
 
-    <aside class="card sidebar">
-      <div class="kg-preview">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <strong>知识图谱概览</strong>
-          <span style="font-size:12px;color:var(--muted)">视觉展示</span>
-        </div>
-        <!-- 不修改图片文件，仅引用已有资源 -->
-        <img src="/gxn14/heart-health-qa/knowledge-graph.svg" alt="知识图谱" />
-        <div class="kg-meta">核心节点：自我管理行为 / 危险因素管理 / 心理管理 / 运动管理 / 饮食管理 / 药物管理</div>
+    <aside class="panel side-panel">
+      <div class="side-panel-header">
+        <span>知识图谱</span>
+        <span>Overview</span>
+      </div>
+      <div class="kg-frame">
+        <img src="knowledge-map.svg" alt="心血管疾病知识图谱" />
+      </div>
+      <div class="side-note">
+        重点覆盖：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理。
       </div>
     </aside>
-
-    <footer class="note">提示：页面样式已优化为医学问答风格；问答逻辑与知识图谱内容未被修改。</footer>
   </div>
 
   <script>
-    /* --- 以下脚本保持原样（不改动问答逻辑） --- */
     const knowledgeData = {
       "title": "心血管疾病患者居家心脏康复自我管理知识图谱",
       "description": "根据用户提供的知识图谱图片整理。关系采用“包含”，子节点关系为“相关知识点”。图片中的部分小字可能存在识别误差，建议上线前核对。",
@@ -230,7 +488,6 @@
     function renderQuestionChips() {
       const items = knowledgeData.qa;
       questionList.innerHTML = '';
-
       items.forEach((item, index) => {
         const chip = document.createElement('button');
         chip.type = 'button';
@@ -243,25 +500,32 @@
 
     function showQuestion(questionText, activeIndex = -1) {
       const matched = knowledgeData.qa.find(item => item.question === questionText) || knowledgeData.qa.find(item => item.question.includes(questionText) || questionText.includes(item.question));
-
       if (!matched) {
-        answerBox.innerHTML = `\n          <h2>未找到匹配答案</h2>\n          <div class="answer-content">当前系统已覆盖的主要问题包括：${knowledgeData.qa.map(item => item.question).join('；')}。如需进一步扩展，可继续补充新的知识条目。</div>\n        `;
+        answerBox.innerHTML = `
+          <h2>未找到匹配答案</h2>
+          <div class="answer-content">当前系统已覆盖的主要问题包括：${knowledgeData.qa.map(item => item.question).join('；')}。如需进一步扩展，可继续补充新的知识条目。</div>
+        `;
         return;
       }
 
       const chips = document.querySelectorAll('.question-chip');
-      chips.forEach((chip, idx) => {
-        chip.classList.toggle('active', idx === activeIndex || chip.textContent === matched.question);
-      });
+      chips.forEach((chip, idx) => chip.classList.toggle('active', idx === activeIndex || chip.textContent === matched.question));
 
       const nodeHtml = (matched.relatedNodes || []).map(node => `<span class="node-badge">${node}</span>`).join('');
-      answerBox.innerHTML = `\n        <h2>${matched.question}</h2>\n        <div class="answer-content">${matched.answer}</div>\n        <div class="answer-meta">${nodeHtml}</div>\n      `;
+      answerBox.innerHTML = `
+        <h2>${matched.question}</h2>
+        <div class="answer-content">${matched.answer}</div>
+        <div class="answer-meta">${nodeHtml}</div>
+      `;
     }
 
     function searchQuestion() {
       const keyword = questionInput.value.trim();
       if (!keyword) {
-        answerBox.innerHTML = `\n          <h2>系统已支持的问题</h2>\n          <div class="answer-content">请输入问题后再查询，例如：心力衰竭有哪些常见症状？</div>\n        `;
+        answerBox.innerHTML = `
+          <h2>系统已支持的问题</h2>
+          <div class="answer-content">请输入问题后再查询，例如：心力衰竭有哪些常见症状？</div>
+        `;
         return;
       }
 
@@ -275,24 +539,19 @@
         const idx = knowledgeData.qa.findIndex(item => item.question === matched.question);
         showQuestion(matched.question, idx);
       } else {
-        answerBox.innerHTML = `\n          <h2>未找到匹配答案</h2>\n          <div class="answer-content">当前系统暂无该问题的标准答案。建议参考知识图谱中的：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理等节点，并继续补充问答。</div>\n        `;
+        answerBox.innerHTML = `
+          <h2>未找到匹配答案</h2>
+          <div class="answer-content">当前系统暂无该问题的标准答案。建议参考知识图谱中的：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理等节点，并继续补充问答。</div>
+        `;
       }
     }
 
     askBtn.addEventListener('click', searchQuestion);
     questionInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        searchQuestion();
-      }
+      if (event.key === 'Enter') searchQuestion();
     });
 
     renderQuestionChips();
-
-    /* Update the header metadata number (visual only) */
-    try{
-      const metaSpan = document.querySelector('.meta-info span');
-      if(metaSpan) metaSpan.textContent = `已加载：知识图谱 + ${knowledgeData.qa.length} 条问答`;
-    }catch(e){/* ignore */}
   </script>
 </body>
 </html>
