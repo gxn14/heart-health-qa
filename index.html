@@ -11,7 +11,6 @@
     .header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
-    .logo img{width:28px;height:28px;display:block}
     .title{font-size:20px;font-weight:800}
     .subtitle{color:var(--muted);font-size:12px}
     .panel{background:var(--panel);border-radius:var(--radius-xl);padding:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -33,12 +32,9 @@
     .refs a{color:#6b88c6;text-decoration:underline}
     .no-results{padding:14px;color:var(--muted)}
     .note{margin-top:12px;color:var(--muted);font-size:13px}
-
-    /* 侧边栏图片：只保留一张并居中显示，宽度自适应但设置最大宽度 */
-    .sidebar .img-grid{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;max-width:320px;width:100%}
+    .sidebar .img-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
     .img-box img{display:block;width:100%;height:auto}
-
     @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative}.qa-layout{grid-template-columns:1fr;}.question-list{max-height:none}}
   </style>
 </head>
@@ -46,7 +42,7 @@
   <div class="layout">
     <div class="header">
       <div class="brand">
-        <div class="logo"><img src="assets/heart.svg" alt="爱心" /></div>
+        <div class="logo">心</div>
         <div>
           <div class="title">心血管疾病患者居家心脏康复自我管理知识问答</div>
           <div class="subtitle">基于国内外权威指南的心血管健康知识科普系统</div>
@@ -95,7 +91,8 @@
       </div>
 
       <div class="img-grid">
-        <!-- 仅保留最下面的那张图片，居中显示并限制最大宽度 -->
+        <div class="img-box"><img src="knowledge-graph.svg" alt="知识图谱（SVG）" /></div>
+        <div class="img-box"><img src="knowledge-map.svg" alt="知识地图（SVG）" /></div>
         <div class="img-box"><img src="knowledge-graph.png.png" alt="知识图谱（PNG）" /></div>
       </div>
 
@@ -107,7 +104,7 @@
     // Structured Q&A data (29 items) with id, question, answer, source array
     const QA_DATA = [
       {"id":1,"question":"心力衰竭是什么？","answer":"心力衰竭是由心脏结构或功能异常引起的一组临床综合征，可导致心脏充盈或泵血能力异常，并出现呼吸困难、乏力、液体潴留等表现。诊断需要结合病史、体格检查及相关检查，不能仅凭单一症状自行判断。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
-      {"id":2,"question":"心力衰竭有哪些常见症状？","answer":"常见表现包括活动后或平卧时呼吸困难、乏力、运动耐量下降、下肢水肿，有些患者会夜间阵发性呼吸困难。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"}]},
+      {"id":2,"question":"心力衰竭有哪些常见症状？","answer":"心力衰竭常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。","source":[{"name":"《中国心力衰竭诊断和治疗指南（2024）》","url":"https://csc.cma.org.cn/art/2024/4/18/art_619_56220.html"},{"name":"2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure","url":"https://professional.heart.org/en/guidelines-statements/2022-ahaacchfsa-guideline-for-the-management-of-heart-failure-a-report-of-thecir0000000000001063"}]},
       {"id":3,"question":"哪些情况需要尽快就医？","answer":"若出现严重或迅速加重的呼吸困难、持续胸痛、晕厥、意识异常或嘴唇发紫等情况，应立即寻求急诊就医。","source":[{"name":"心血管指南与临床建议","url":"https://example.org"}]},
       {"id":4,"question":"为什么心衰患者要每天监测体重？","answer":"体重在短期内上升可能提示体内液体潴留，是发现病情变化的一个线索。患者可以在固定时间测量并记录以便随访。","source":[{"name":"心衰管理要点","url":"https://example.org"}]},
       {"id":5,"question":"心衰患者怎样正确记录体重？","answer":"建议固定在每天早晨起床后、排尿后、早餐前测量，使用同一台体重秤并记录日期和体重数值。","source":[{"name":"心衰患者教育手册","url":"https://example.org"}]},
@@ -131,8 +128,8 @@
       {"id":23,"question":"心衰患者为什么需要管理血压、血糖和血脂？","answer":"高血压、糖尿病和血脂异常等合并问题可能影响心血管健康与整体预后。","source":[{"name":"危险因素管理","url":"https://example.org"}]},
       {"id":24,"question":"心衰患者如何管理压力和焦虑？","answer":"可以尝试与家人沟通、规律作息和放松训练，并向医护人员说明持续的焦虑或抑郁症状。","source":[{"name":"心理管理","url":"https://example.org"}]},
       {"id":25,"question":"家属可以怎样帮助心衰患者？","answer":"家属可以协助记录体重和症状、整理药物清单、陪同复诊、支持合理饮食和安全活动，并给予心理支持。","source":[{"name":"家庭支持","url":"https://example.org"}]},
-      {"id":26,"question":"心衰患者为什么要定期复诊？","answer":"复诊可帮助评估症状、体征、血压、肾功能、电解质及治疗耐受性，并根据情况调整管理。","source":[{"name":"复诊建议","url":"https://example.org"}]},
-      {"id":27,"question":"心衰患者感冒或感染时要注意什么？","answer":"感染可能诱发或加重心衰。若发热、咳嗽或其���感染症状伴呼吸困难加重，应及时就医。","source":[{"name":"感染管理","url":"https://example.org"}]},
+      {"id":26,"question":"心衰患者为什么要定期复诊？","answer":"复诊可帮助评估症状、体���、血压、肾功能、电解质及治疗耐受性，并根据情况调整管理。","source":[{"name":"复诊建议","url":"https://example.org"}]},
+      {"id":27,"question":"心衰患者感冒或感染时要注意什么？","answer":"感染可能诱发或加重心衰。若发热、咳嗽或其他感染症状伴随气促加重、明显乏力或意识改变，应及时就医。","source":[{"name":"感染管理","url":"https://example.org"}]},
       {"id":28,"question":"心衰患者可以自行调整利尿剂吗？","answer":"只有在医疗团队明确提供书面或清晰的个体化调整计划时，患者才应按照该计划行动。","source":[{"name":"利尿剂调整","url":"https://example.org"}]},
       {"id":29,"question":"如何建立家庭自我管理清单？","answer":"可将每日体重、症状变化、血压和心率（如医护人员建议）、服药情况、活动和饮食注意事项记录下来并随访。","source":[{"name":"自我管理清单","url":"https://example.org"}]}
     ];
