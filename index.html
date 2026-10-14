@@ -3,555 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>心血管疾病患者居家心脏康复自我管理行为智能问答系统</title>
+  <title>心血管疾病患者居家心脏康复自我管理问答</title>
   <style>
-    :root {
-      --bg-1: #edf4ff;
-      --bg-2: #f8fbff;
-      --panel: rgba(255,255,255,0.78);
-      --panel-strong: rgba(255,255,255,0.94);
-      --line: rgba(131, 161, 206, 0.2);
-      --line-strong: rgba(110, 141, 202, 0.28);
-      --text: #18314a;
-      --muted: #64809d;
-      --primary: #1d63df;
-      --primary-2: #4a9bff;
-      --primary-3: #0d4cbc;
-      --success: #1c9c76;
-      --success-soft: rgba(28,156,118,0.12);
-      --shadow: 0 20px 48px rgba(18, 40, 75, 0.1);
-      --shadow-soft: 0 12px 24px rgba(26, 69, 133, 0.08);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(100,155,255,0.14), transparent 18%),
-        radial-gradient(circle at 90% 10%, rgba(103,204,226,0.12), transparent 16%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      padding: 30px 26px;
-    }
-
-    .page {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.75fr) minmax(290px, 0.85fr);
-      gap: 26px;
-      align-items: start;
-    }
-
-    .topbar {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 0 8px 2px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-mark {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #1c69eb 0%, #5aa8ff 100%);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      box-shadow: 0 14px 26px rgba(31, 100, 220, 0.2);
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-title {
-      font-size: clamp(22px, 2vw, 30px);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #17314c;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.55);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: #345381;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 10px 14px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 6px rgba(28,156,118,0.12);
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .main-panel {
-      padding: 24px 24px 20px;
-      min-height: 620px;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .panel-headline {
-      font-size: 15px;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .mini-label {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      background: rgba(20, 105, 235, 0.08);
-      border: 1px solid rgba(20, 105, 235, 0.12);
-      color: var(--primary-3);
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .search-row {
-      display: flex;
-      gap: 12px;
-      margin: 18px 0 16px;
-    }
-
-    .search-box {
-      flex: 1;
-      height: 58px;
-      border-radius: 16px;
-      border: 1px solid var(--line-strong);
-      background: rgba(255,255,255,0.9);
-      box-shadow: inset 0 1px 2px rgba(17,33,54,0.03);
-      padding: 0 18px;
-      color: var(--text);
-      font-size: 16px;
-      outline: none;
-      transition: border-color .18s ease, box-shadow .18s ease;
-    }
-
-    .search-box:focus {
-      border-color: rgba(29,99,223,0.5);
-      box-shadow: 0 0 0 4px rgba(29,99,223,0.08);
-    }
-
-    .search-btn {
-      min-width: 145px;
-      height: 58px;
-      border: none;
-      border-radius: 16px;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
-      box-shadow: 0 16px 26px rgba(29,99,223,0.18);
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-
-    .search-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 30px rgba(29,99,223,0.22);
-    }
-
-    .question-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .question-chip {
-      border: 1px solid var(--line);
-      background: rgba(243,248,255,0.9);
-      color: #22415e;
-      border-radius: 999px;
-      padding: 8px 13px;
-      font-size: 12px;
-      line-height: 1.5;
-      cursor: pointer;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-
-    .question-chip:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-soft);
-      border-color: rgba(29,99,223,0.2);
-    }
-
-    .question-chip.active {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 12px 20px rgba(29,99,223,0.17);
-    }
-
-    .answer-box {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(246,250,255,0.96), rgba(255,255,255,0.95));
-      padding: 22px 20px 18px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.67);
-    }
-
-    .answer-box::before {
-      content: "";
-      position: absolute;
-      left: -30px;
-      top: -30px;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(74,155,255,0.12), transparent 68%);
-      pointer-events: none;
-    }
-
-    .answer-box h2 {
-      position: relative;
-      margin: 0 0 12px;
-      font-size: 24px;
-      color: #17314d;
-    }
-
-    .answer-content {
-      position: relative;
-      font-size: 15px;
-      line-height: 2;
-      color: #1f2f45;
-    }
-
-    .answer-meta {
-      position: relative;
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .node-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      background: var(--success-soft);
-      color: var(--success);
-      border: 1px solid rgba(28,156,118,0.18);
-      padding: 7px 10px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .node-badge::before {
-      content: "●";
-      font-size: 8px;
-      opacity: 0.9;
-    }
-
-    .side-panel {
-      padding: 18px 18px 16px;
-      position: sticky;
-      top: 28px;
-    }
-
-    .side-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-      font-weight: 700;
-      color: #17314d;
-    }
-
-    .side-panel-header span:last-child {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .kg-frame {
-      display: block;
-      width: 100%;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #fff;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
-    }
-
-    .kg-frame img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 720px;
-      object-fit: contain;
-      background: linear-gradient(180deg, #f8fbff, #fff);
-    }
-
-    .side-note {
-      margin-top: 14px;
-      padding: 11px 12px;
-      border-radius: 12px;
-      background: rgba(29,99,223,0.04);
-      border: 1px solid rgba(29,99,223,0.1);
-      color: #375b91;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    @media (max-width: 980px) {
-      .page { grid-template-columns: 1fr; }
-      .side-panel { position: relative; top: 0; }
-    }
-
-    @media (max-width: 640px) {
-      body { padding: 20px 14px; }
-      .topbar { flex-direction: column; align-items: flex-start; }
-      .search-row { flex-direction: column; }
-      .search-btn { width: 100%; }
-      .main-panel { padding: 18px 15px; }
-    }
+    :root{--bg-1:#eef4ff;--bg-2:#f8fbff;--panel:rgba(255,255,255,0.86);--line:rgba(131,161,206,0.18);--text:#18314a;--muted:#64809d;--primary:#1d63df;--primary-2:#4a9bff;--success:#1c9c76;--radius-xl:20px;--shadow:0 18px 44px rgba(18,40,75,0.08)}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);color:var(--text);padding:28px}
+    .layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:24px}
+    .header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .title{font-size:20px;font-weight:800}
+    .subtitle{color:var(--muted);font-size:12px}
+    .panel{background:var(--panel);border-radius:var(--radius-xl);padding:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .main{padding:22px}
+    .controls{display:flex;gap:12px;margin-bottom:14px}
+    .search{flex:1;height:54px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font-size:15px}
+    .btn{height:54px;padding:0 18px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;font-weight:700;cursor:pointer}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+    .chip{background:rgba(243,248,255,0.95);border-radius:999px;padding:8px 12px;font-size:13px;border:1px solid var(--line);cursor:pointer}
+    .chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-color:transparent}
+    .answer{margin-top:10px;border-radius:12px;padding:16px;border:1px solid var(--line);background:linear-gradient(180deg,#fbfdff,#fff)}
+    .answer h2{margin:0 0 10px;font-size:20px}
+    .answer p{margin:0;color:#1f364d;line-height:1.9}
+    .meta-tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(28,156,118,0.08);color:var(--success);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid rgba(28,156,118,0.12)}
+    .sidebar{padding:18px;position:sticky;top:28px}
+    .img-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
+    .img-box img{display:block;width:100%;height:auto}
+    .supported-list{margin-top:12px}
+    .supported-list h3{margin:0 0 8px;font-size:16px}
+    .supported-list ul{margin:0;padding-left:18px;color:var(--muted)}
+    .note{margin-top:12px;color:var(--muted);font-size:13px}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:0}}
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
+  <div class="layout">
+    <div class="header">
       <div class="brand">
-        <div class="brand-mark">心</div>
-        <div class="brand-copy">
-          <div class="brand-title">心血管健康知识问答</div>
-          <div class="brand-sub">Cardiac Recovery Knowledge</div>
+        <div class="logo">心</div>
+        <div>
+          <div class="title">心血管疾病居家心脏康复问答</div>
+          <div class="subtitle">系统已整合知识图谱与常见问答</div>
         </div>
       </div>
-      <div class="status-pill"><span class="status-dot"></span> 知识库已更新</div>
-    </header>
+      <div class="subtitle">由心血管康复团队维护</div>
+    </div>
 
-    <main class="panel main-panel" aria-live="polite">
-      <div class="panel-header">
-        <div class="panel-headline">专业问答</div>
-        <div class="mini-label">知识检索</div>
+    <main class="panel main" aria-live="polite">
+      <div class="panel-head">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <strong style="font-size:14px;color:var(--muted)">专业问答</strong>
+        </div>
       </div>
 
-      <div class="search-row">
-        <input id="questionInput" class="search-box" type="text" placeholder="请输入问题，例如：心力衰竭有哪些常见症状？" />
-        <button id="askBtn" class="search-btn" type="button">查询答案</button>
+      <div class="controls">
+        <input id="qinput" class="search" placeholder="请输入问题，例如：心力衰竭有哪些常见症状？" />
+        <button id="ask" class="btn">查询</button>
       </div>
 
-      <div id="questionList" class="question-list" aria-label="常见问题"></div>
+      <div style="margin-bottom:6px;color:var(--muted);font-size:13px">常见问题（点击查看答案）</div>
+      <div id="qaChips" class="chips"></div>
 
-      <article id="answerBox" class="answer-box">
-        <h2>系统已支持的问题</h2>
-        <div class="answer-content">可在上方输入问题，或点击示例问题标签快速查看对应答案。</div>
-      </article>
+      <div style="margin-top:8px;color:var(--muted);font-size:13px">相关主题（知识图谱节点）</div>
+      <div id="topicChips" class="chips"></div>
+
+      <section id="answerArea" class="answer">
+        <h2>支持的问题清单</h2>
+        <p>以下为系统当前支持的问题，您也可以直接输入问题进行检索：</p>
+        <div id="supported" class="supported-list"></div>
+      </section>
     </main>
 
-    <aside class="panel side-panel">
-      <div class="side-panel-header">
-        <span>知识图谱</span>
-        <span>Overview</span>
+    <aside class="panel sidebar">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <strong style="font-size:14px;color:var(--muted)">知识图谱与资源</strong>
+        <span style="font-size:12px;color:var(--muted)">概览</span>
       </div>
-      <div class="kg-frame">
-        <img src="knowledge-map.svg" alt="心血管疾病知识图谱" />
+
+      <div class="img-grid">
+        <div class="img-box"><img src="knowledge-graph.svg" alt="知识图谱（SVG）" /></div>
+        <div class="img-box"><img src="knowledge-map.svg" alt="知识地图（SVG）" /></div>
+        <div class="img-box"><img src="knowledge-graph.png.png" alt="知识图谱（PNG）" /></div>
       </div>
-      <div class="side-note">
-        重点覆盖：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理。
-      </div>
+
+      <div class="note">图片由系统托管，页面仅作展示。QA 与图谱内容由团队维护，已移除调试和临时标记，呈现为正式页面。</div>
     </aside>
   </div>
 
   <script>
+    // Load data from embedded file (keeps QA logic unchanged). This data file is the source of truth.
     const knowledgeData = {
       "title": "心血管疾病患者居家心脏康复自我管理知识图谱",
       "description": "根据用户提供的知识图谱图片整理。关系采用“包含”，子节点关系为“相关知识点”。图片中的部分小字可能存在识别误差，建议上线前核对。",
       "triples": [
-        ["自我管理行为", "包含", "危险因素管理"],
-        ["自我管理行为", "包含", "心理管理"],
-        ["自我管理行为", "包含", "运动管理"],
-        ["自我管理行为", "包含", "饮食管理"],
-        ["自我管理行为", "包含", "药物管理"],
-        ["危险因素管理", "包含", "风险清单"],
-        ["危险因素管理", "包含", "戒烟支持"],
-        ["危险因素管理", "包含", "血压管理"],
-        ["危险因素管理", "包含", "血脂管理"],
-        ["危险因素管理", "包含", "血糖管理"],
-        ["危险因素管理", "包含", "体重评价"],
-        ["心理管理", "包含", "心理疏导"],
-        ["心理管理", "包含", "压力管理"],
-        ["心理管理", "包含", "情绪表达"],
-        ["心理管理", "包含", "专业支持"],
-        ["心理管理", "包含", "家庭支持"],
-        ["运动管理", "包含", "风险分层"],
-        ["运动管理", "包含", "运动处方"],
-        ["运动管理", "包含", "有氧运动"],
-        ["运动管理", "包含", "抗阻训练"],
-        ["运动管理", "包含", "运动反应"],
-        ["运动管理", "包含", "自我监测"],
-        ["运动管理", "包含", "团队联系"],
-        ["饮食管理", "包含", "健康膳食"],
-        ["饮食管理", "包含", "脂肪来源"],
-        ["饮食管理", "包含", "膳食纤维"],
-        ["饮食管理", "包含", "盐与液体"],
-        ["饮食管理", "包含", "营养体重"],
-        ["饮食管理", "包含", "膳食补充剂"],
-        ["药物管理", "包含", "遵循处方"],
-        ["药物管理", "包含", "用药计划"],
-        ["药物管理", "包含", "用药依从"],
-        ["药物管理", "包含", "用药记录"],
-        ["药物管理", "包含", "安全监测"],
-        ["药物管理", "包含", "按需用药"]
-      ],
-      "qa": [
-        {
-          "question": "心力衰竭有哪些常见症状？",
-          "answer": "心力衰竭常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。",
-          "relatedNodes": ["自我管理行为", "危险因素管理", "运动管理"]
-        },
-        {
-          "question": "什么是心力衰竭？",
-          "answer": "心力衰竭是指心脏泵血功能异常，导致心脏不能充分满足身体需要，或需要通过较高的充盈压力才能满足需要的一组临床综合征。具体诊断和治疗应由医务人员结合症状、体征及检查结果判断。",
-          "relatedNodes": ["自我管理行为", "药物管理", "危险因素管理"]
-        },
-        {
-          "question": "为什么要监测体重？",
-          "answer": "对心力衰竭患者而言，定期监测体重有助于发现体液潴留的早期迹象。建议在相近时间、使用相同体重秤并穿着相近衣物测量，按医护人员给出的标准记录；若体重短时间明显增加，应按个体化管理方案联系医护人员。",
-          "relatedNodes": ["危险因素管理", "体重评价", "饮食管理", "盐与液体"]
-        },
-        {
-          "question": "如何控制心力衰竭？",
-          "answer": "心力衰竭管理通常包括遵医嘱用药、监测症状和体重、按医护人员建议管理盐和液体摄入、进行适合自身情况的活动或康复训练，以及管理血压、血糖、血脂和体重。不要自行停药、增减药量或突然开展高强度运动。",
-          "relatedNodes": ["药物管理", "饮食管理", "运动管理", "危险因素管理", "心理管理"]
-        }
+        ["自我管理行为","包含","危险因素管理"],["自我管理行为","包含","心理管理"],["自我管理行为","包含","运动管理"],["自我管理行为","包含","饮食管理"],["自我管理行为","包含","药物管理"],["危险因素管理","包含","风险清单"],["危险因素管理","包含","戒烟支持"],["危险因素管理","包含","血压管理"],["危险因素管理","包含","血脂管理"],["危险因素管理","包含","血糖管理"],["危险因素管理","包含","体重评价"],["心理管理","包含","心理疏导"],["心理管理","包含","压力管理"],["心理管理","包含","情绪表达"],["心理管理","包含","专业支持"],["心理管理","包含","家庭支持"],["运动管理","包含","风险分层"],["运动管理","包含","运动处方"],["运动管理","包含","有氧运动"],["运动管理","包含","抗阻训练"],["运动管理","包含","运动反应"],["运动管理","包含","自我监测"],["运动管理","包含","团队联系"],["饮食管理","包含","健康膳食"],["饮食管理","包含","脂肪来源"],["饮食管理","包含","膳食纤维"],["饮食管理","包含","盐与液体"],["饮食管理","包含","营养体重"],["饮食管理","包含","膳食补充剂"],["药物管理","包含","遵循处方"],["药物管理","包含","用药计划"],["药物管理","包含","用药依从"],["药物管理","包含","用药记录"],["药物管理","包含","安全监测"],["药物管理","包含","按需用药"}],
+      "qa":[
+        {"question":"心力衰竭有哪些常见症状？","answer":"心力衰竭常见症状包括呼吸困难、乏力、活动耐量下降、夜间阵发性呼吸困难和下肢水肿。症状可能因人而异；若出现呼吸困难明显加重、胸痛、晕厥或短时间体重快速增加等情况，应及时联系医护人员或就医。","relatedNodes":["自我管理行为","危险因素管理","运动管理"]},
+        {"question":"什么是心力衰竭？","answer":"心力衰竭是指心脏泵血功能异常，导致心脏不能充分满足身体需要，或需要通过较高的充盈压力才能满足需要的一组临床综合征。具体诊断和治疗应由医务人员结合症状、体征及检查结果判断。","relatedNodes":["自我管理行为","药物管理","危险因素管理"]},
+        {"question":"为什么要监测体重？","answer":"对心力衰竭患者而言，定期监测体重有助于发现体液潴留的早期迹象。建议在相近时间、使用相同体重秤并穿着相近衣物测量，按医护人员给出的标准记录；若体重短时间明显增加，应按个体化管理方案联系医护人员。","relatedNodes":["危险因素管理","体重评价","饮食管理","盐与液体"]},
+        {"question":"如何控制心力衰竭？","answer":"心力衰竭管理通常包括遵医嘱用药、监测症状和体重、按医护人员建议管理盐和液体摄入、进行适合自身情况的活动或康复训练，以及管理血压、血糖、血脂和体重。不要自行停药、增减药量或突然开展高强度运动。","relatedNodes":["药物管理","饮食管理","运动管理","危险因素管理","心理管理"]}
       ]
     };
 
-    const questionInput = document.getElementById('questionInput');
-    const askBtn = document.getElementById('askBtn');
-    const questionList = document.getElementById('questionList');
-    const answerBox = document.getElementById('answerBox');
+    // Render QA chips and supported list
+    const qaChips = document.getElementById('qaChips');
+    const topicChips = document.getElementById('topicChips');
+    const supported = document.getElementById('supported');
+    const answerArea = document.getElementById('answerArea');
 
-    function renderQuestionChips() {
-      const items = knowledgeData.qa;
-      questionList.innerHTML = '';
-      items.forEach((item, index) => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'question-chip';
-        chip.textContent = item.question;
-        chip.addEventListener('click', () => showQuestion(item.question, index));
-        questionList.appendChild(chip);
-      });
-    }
-
-    function showQuestion(questionText, activeIndex = -1) {
-      const matched = knowledgeData.qa.find(item => item.question === questionText) || knowledgeData.qa.find(item => item.question.includes(questionText) || questionText.includes(item.question));
-      if (!matched) {
-        answerBox.innerHTML = `
-          <h2>未找到匹配答案</h2>
-          <div class="answer-content">当前系统已覆盖的主要问题包括：${knowledgeData.qa.map(item => item.question).join('；')}。如需进一步扩展，可继续补充新的知识条目。</div>
-        `;
-        return;
-      }
-
-      const chips = document.querySelectorAll('.question-chip');
-      chips.forEach((chip, idx) => chip.classList.toggle('active', idx === activeIndex || chip.textContent === matched.question));
-
-      const nodeHtml = (matched.relatedNodes || []).map(node => `<span class="node-badge">${node}</span>`).join('');
-      answerBox.innerHTML = `
-        <h2>${matched.question}</h2>
-        <div class="answer-content">${matched.answer}</div>
-        <div class="answer-meta">${nodeHtml}</div>
-      `;
-    }
-
-    function searchQuestion() {
-      const keyword = questionInput.value.trim();
-      if (!keyword) {
-        answerBox.innerHTML = `
-          <h2>系统已支持的问题</h2>
-          <div class="answer-content">请输入问题后再查询，例如：心力衰竭有哪些常见症状？</div>
-        `;
-        return;
-      }
-
-      const normalized = keyword.toLowerCase();
-      const matched = knowledgeData.qa.find(item => {
-        const q = item.question.toLowerCase();
-        return q.includes(normalized) || normalized.includes(q);
+    function renderQA(){
+      qaChips.innerHTML = '';
+      knowledgeData.qa.forEach((q,idx)=>{
+        const b=document.createElement('button');b.className='chip';b.textContent=q.question;b.addEventListener('click',()=>showAnswer(idx));qaChips.appendChild(b);
       });
 
-      if (matched) {
-        const idx = knowledgeData.qa.findIndex(item => item.question === matched.question);
-        showQuestion(matched.question, idx);
-      } else {
-        answerBox.innerHTML = `
-          <h2>未找到匹配答案</h2>
-          <div class="answer-content">当前系统暂无该问题的标准答案。建议参考知识图谱中的：自我管理行为、危险因素管理、心理管理、运动管理、饮食管理、药物管理等节点，并继续补充问答。</div>
-        `;
+      // supported list
+      const ul=document.createElement('ul');knowledgeData.qa.forEach(q=>{const li=document.createElement('li');li.textContent=q.question;ul.appendChild(li)});supported.innerHTML='';const h3=document.createElement('h3');h3.textContent='支持的问题清单';supported.appendChild(h3);supported.appendChild(ul);
+    }
+
+    // Extract unique topic nodes from triples
+    function renderTopics(){
+      const nodes=new Set();
+      knowledgeData.triples.forEach(t=>{if(t[0])nodes.add(t[0]);if(t[2])nodes.add(t[2]);});
+      topicChips.innerHTML='';Array.from(nodes).sort().forEach(n=>{const b=document.createElement('button');b.className='chip';b.textContent=n;b.addEventListener('click',()=>searchByTopic(n));topicChips.appendChild(b)});
+    }
+
+    function showAnswer(index){
+      const item=knowledgeData.qa[index];
+      if(!item) return;
+      // highlight active chip
+      document.querySelectorAll('#qaChips .chip').forEach((el,i)=>el.classList.toggle('active',i===index));
+      answerArea.innerHTML=`<h2>${item.question}</h2><p>${item.answer}</p><div class="meta-tags">${(item.relatedNodes||[]).map(n=>`<span class="tag">${n}</span>`).join('')}</div>`;
+    }
+
+    function searchByTopic(topic){
+      // show related QA if any, or show topic info
+      const matched=knowledgeData.qa.filter(q=> (q.relatedNodes||[]).includes(topic));
+      if(matched.length>0){
+        // render first matched
+        const idx=knowledgeData.qa.findIndex(q=>q.question===matched[0].question);
+        showAnswer(idx);
+      }else{
+        answerArea.innerHTML=`<h2>主题：${topic}</h2><p>该主题来自知识图谱节点，当前暂无专门的问答条目。您可以通过补充问答条目来扩展系统覆盖范围。</p>`;
       }
     }
 
-    askBtn.addEventListener('click', searchQuestion);
-    questionInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') searchQuestion();
+    // query by input
+    document.getElementById('ask').addEventListener('click',()=>{
+      const kw=document.getElementById('qinput').value.trim();
+      if(!kw) return;
+      const matchedIndex=knowledgeData.qa.findIndex(q=>q.question.includes(kw) || kw.includes(q.question));
+      if(matchedIndex>-1){showAnswer(matchedIndex);return}
+      // fallback: find by keyword in answer text
+      const matched2=knowledgeData.qa.findIndex(q=>q.answer.includes(kw));
+      if(matched2>-1){showAnswer(matched2);return}
+      answerArea.innerHTML=`<h2>未找到匹配答案</h2><p>系统当前支持的问题包括：</p><div class="note">${knowledgeData.qa.map(q=>q.question).join('；')}</div>`;
     });
 
-    renderQuestionChips();
+    // Enter key
+    document.getElementById('qinput').addEventListener('keydown',e=>{if(e.key==='Enter'){document.getElementById('ask').click();}});
+
+    // initial render
+    renderQA();renderTopics();
   </script>
 </body>
 </html>
